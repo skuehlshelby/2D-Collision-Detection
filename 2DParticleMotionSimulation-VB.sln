@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "2DParticleMotionSimulation-VB", "2DParticleMotionSimulation-VB\2DParticleMotionSimulation-VB.vbproj", "{024B8DA7-DDC7-494D-840A-66194856F4F2}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "2DParticleMotionSimulation-VB", "2DParticleMotionSimulation-VB\2DParticleMotionSimulation-VB.vbproj", "{024B8DA7-DDC7-494D-840A-66194856F4F2}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "UnitTests", "UnitTests\UnitTests.vbproj", "{18E3D2A3-2456-4F4D-B363-582B70FCCBF4}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Geometry", "Geometry\Geometry.vbproj", "{190DF025-EA21-4CDC-822A-6FE86732B64F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{024B8DA7-DDC7-494D-840A-66194856F4F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{024B8DA7-DDC7-494D-840A-66194856F4F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{024B8DA7-DDC7-494D-840A-66194856F4F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18E3D2A3-2456-4F4D-B363-582B70FCCBF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18E3D2A3-2456-4F4D-B363-582B70FCCBF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18E3D2A3-2456-4F4D-B363-582B70FCCBF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18E3D2A3-2456-4F4D-B363-582B70FCCBF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{190DF025-EA21-4CDC-822A-6FE86732B64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{190DF025-EA21-4CDC-822A-6FE86732B64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{190DF025-EA21-4CDC-822A-6FE86732B64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{190DF025-EA21-4CDC-822A-6FE86732B64F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
