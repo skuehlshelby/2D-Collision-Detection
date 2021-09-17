@@ -9,6 +9,7 @@ Public Class World
     Private ReadOnly _circles As ICollection(Of IShape) = New List(Of IShape)
     Private ReadOnly _collisionResolver As ICollisionSolver = New DiscreteCollisionSolver
     Private ReadOnly _splitMethod As SplitMethod = SplitMethod.Midpoint
+    Private ReadOnly _collisionDetectionMethod As CollisionDetectionMethod = CollisionDetectionMethod.Discrete
 
     Sub New(height As Single, width As Single)
         Bounds = New Rectangle((0.0F, height), (width, 0.0F))
@@ -30,10 +31,9 @@ Public Class World
 
     Public Sub Update(changeInTime As Single)
         If _circles.Any() Then
-            Dim bvh As BoundingVolumeHierarchy = New BoundingVolumeHierarchy(_circles.ToArray(), _splitMethod)
 
-            For Each setOfCandidates As IShape() In bvh.GetCollisionCandidates()
-                _collisionResolver.SolveCollision(setOfCandidates)
+            For Each collision As Pair(Of IShape) In _collisionDetectionMethod.GetCollisions(_circles.ToArray(), _splitMethod)
+                _collisionResolver.SolveCollision(collision)
             Next
 
             For Each circle As IShape In _circles

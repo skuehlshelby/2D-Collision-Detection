@@ -77,7 +77,10 @@
     <Compile Include="Collision\CollisionDetectionMethod.vb" />
     <Compile Include="Collision\DiscreteCollisionSolver.vb" />
     <Compile Include="Collision\ICollisionSolver.vb" />
+    <Compile Include="Collision\IResolveCollision.vb" />
+    <Compile Include="Collision\WorldBoundCollisionResolver.vb" />
     <Compile Include="Fraction.vb" />
+    <Compile Include="Pair.vb" />
     <Compile Include="Rectangle.vb" />
     <Compile Include="Circle.vb" />
     <Compile Include="IShape.vb" />

@@ -1,7 +1,7 @@
 ﻿Namespace Collision
     Public Interface ICollisionSolver
 
-        Sub SolveCollision(candidates As IShape())
+        Sub SolveCollision(collision As Pair(Of IShape))
 
     End Interface
 End NameSpace

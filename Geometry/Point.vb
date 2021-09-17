@@ -12,6 +12,8 @@ Public Structure Point
 
     Public ReadOnly Property Y As Single
 
+    Public Shared ReadOnly Property Origin As Point = (0.0F, 0.0F)
+
     <Pure>
     Public Function Max() As Single
         Return Math.Max(X, Y)

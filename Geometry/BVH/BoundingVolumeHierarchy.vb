@@ -5,7 +5,15 @@
 
         Public Sub New(shapes As IShape(), splitMethod As SplitMethod)
             _root = Build(shapes, splitMethod)
+
+            Dim results As ICollection(Of IShape()) = New List(Of IShape())()
+
+            GetLeaves(_root, results)
+
+            Leaves = results
         End Sub
+
+        Public ReadOnly Property Leaves As IEnumerable(Of IShape())
 
         Private Shared Function Build(shapes As IShape(), splitMethod As SplitMethod) As BvhBuildNode
             If shapes.Length > 2 Then
@@ -55,39 +63,12 @@
 
         End Class
 
-        Public Function GetCollisionCandidates() As ICollection(Of IShape())
-            Dim candidates As ICollection(Of IShape()) = New List(Of IShape())
-
-            Find(_root, candidates)
-
-            Return candidates
-        End Function
-
-        Private Shared Sub Find(node As BvhBuildNode, candidates As ICollection(Of IShape()))
+        Private Shared Sub GetLeaves(node As BvhBuildNode, leaves As ICollection(Of IShape()))
             If node.IsLeaf Then
-                candidates.Add(node.Shapes)
+                leaves.Add(node.Shapes)
             Else
-                Find(node.Left, candidates)
-                Find(node.Right, candidates)
-            End If
-        End Sub
-
-        Public Function GetCollisionCandidates(shape As IShape) As ICollection(Of IShape())
-            Dim candidates As ICollection(Of IShape()) = New List(Of IShape())
-
-            Find(_root, shape, candidates)
-
-            Return candidates
-        End Function
-
-        Private Shared Sub Find(node As BvhBuildNode, shape As IShape, candidates As ICollection(Of IShape()))
-            If node.Bounds.Intersects(shape.Bounds()) Then
-                If node.IsLeaf Then
-                    candidates.Add(node.Shapes)
-                Else
-                    Find(node.Left, shape, candidates)
-                    Find(node.Right, shape, candidates)
-                End If
+                GetLeaves(node.Left, leaves)
+                GetLeaves(node.Right, leaves)
             End If
         End Sub
 
