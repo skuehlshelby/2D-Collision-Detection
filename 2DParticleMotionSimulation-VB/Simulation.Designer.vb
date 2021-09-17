@@ -24,10 +24,13 @@ Partial Class Simulation
     Private Sub InitializeComponent()
         Me.particleArea = New System.Windows.Forms.Panel()
         Me.optionsPanel = New System.Windows.Forms.Panel()
+        Me.lblFPS = New System.Windows.Forms.Label()
+        Me.btnFPS = New System.Windows.Forms.NumericUpDown()
         Me.lbl_particleCount = New System.Windows.Forms.Label()
         Me.particleCount = New System.Windows.Forms.NumericUpDown()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.optionsPanel.SuspendLayout
+        CType(Me.btnFPS,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.particleCount,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TableLayoutPanel1.SuspendLayout
         Me.SuspendLayout
@@ -45,6 +48,8 @@ Partial Class Simulation
         '
         Me.optionsPanel.BackColor = System.Drawing.Color.Black
         Me.optionsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.optionsPanel.Controls.Add(Me.lblFPS)
+        Me.optionsPanel.Controls.Add(Me.btnFPS)
         Me.optionsPanel.Controls.Add(Me.lbl_particleCount)
         Me.optionsPanel.Controls.Add(Me.particleCount)
         Me.optionsPanel.Dock = System.Windows.Forms.DockStyle.Fill
@@ -53,6 +58,27 @@ Partial Class Simulation
         Me.optionsPanel.Name = "optionsPanel"
         Me.optionsPanel.Size = New System.Drawing.Size(234, 444)
         Me.optionsPanel.TabIndex = 1
+        '
+        'lblFPS
+        '
+        Me.lblFPS.AutoSize = true
+        Me.lblFPS.Location = New System.Drawing.Point(12, 93)
+        Me.lblFPS.Name = "lblFPS"
+        Me.lblFPS.Size = New System.Drawing.Size(110, 15)
+        Me.lblFPS.TabIndex = 3
+        Me.lblFPS.Text = "Frames Per Second:"
+        '
+        'btnFPS
+        '
+        Me.btnFPS.BackColor = System.Drawing.Color.Black
+        Me.btnFPS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.btnFPS.ForeColor = System.Drawing.Color.White
+        Me.btnFPS.Location = New System.Drawing.Point(128, 91)
+        Me.btnFPS.Name = "btnFPS"
+        Me.btnFPS.Size = New System.Drawing.Size(52, 23)
+        Me.btnFPS.TabIndex = 2
+        Me.btnFPS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.btnFPS.Value = New Decimal(New Integer() {30, 0, 0, 0})
         '
         'lbl_particleCount
         '
@@ -68,7 +94,7 @@ Partial Class Simulation
         Me.particleCount.BackColor = System.Drawing.Color.Black
         Me.particleCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.particleCount.ForeColor = System.Drawing.Color.White
-        Me.particleCount.Location = New System.Drawing.Point(111, 43)
+        Me.particleCount.Location = New System.Drawing.Point(128, 43)
         Me.particleCount.Name = "particleCount"
         Me.particleCount.Size = New System.Drawing.Size(52, 23)
         Me.particleCount.TabIndex = 0
@@ -100,6 +126,7 @@ Partial Class Simulation
         Me.Text = "Particle Motion Simulation"
         Me.optionsPanel.ResumeLayout(false)
         Me.optionsPanel.PerformLayout
+        CType(Me.btnFPS,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.particleCount,System.ComponentModel.ISupportInitialize).EndInit
         Me.TableLayoutPanel1.ResumeLayout(false)
         Me.ResumeLayout(false)
@@ -111,4 +138,6 @@ End Sub
     Friend WithEvents lbl_particleCount As Label
     Friend WithEvents particleCount As NumericUpDown
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents lblFPS As Label
+    Friend WithEvents btnFPS As NumericUpDown
 End Class

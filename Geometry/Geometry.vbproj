@@ -70,11 +70,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Axis.vb" />
-    <Compile Include="BoundingVolumeHierarchy.vb" />
-    <Compile Include="Box2DF.vb" />
+    <Compile Include="BVH\BoundingVolumeHierarchy.vb" />
+    <Compile Include="BVH\PartitionedRectangle.vb" />
+    <Compile Include="BVH\SplitMethod.vb" />
+    <Compile Include="BVH\SplitResult.vb" />
+    <Compile Include="Collision\CollisionDetectionMethod.vb" />
+    <Compile Include="Collision\DiscreteCollisionSolver.vb" />
+    <Compile Include="Collision\ICollisionSolver.vb" />
+    <Compile Include="Fraction.vb" />
+    <Compile Include="Rectangle.vb" />
     <Compile Include="Circle.vb" />
     <Compile Include="IShape.vb" />
-    <Compile Include="LineF.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -90,10 +96,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Point2D.vb" />
-    <Compile Include="Point2DF.vb" />
-    <Compile Include="Vector2D.vb" />
-    <Compile Include="Vector2DF.vb" />
+    <Compile Include="Point.vb" />
+    <Compile Include="Vector.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -114,5 +118,6 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

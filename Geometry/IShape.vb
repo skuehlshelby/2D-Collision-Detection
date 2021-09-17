@@ -1,20 +1,20 @@
 ﻿Imports System.Drawing
 
 Public Interface IShape
-    Property Center As Point2DF
+    Property Center As Point
 
-    Property Velocity As Vector2DF
+    Property Velocity As Vector
 
-    Property Acceleration As Vector2DF
+    Property Acceleration As Vector
 
     Property Color As Color
 
-    Function Bounds() As Box2DF
+    Property Mass As Single
 
-    Function Contains(point As Point2DF) As Boolean
+    Function Bounds() As Rectangle
 
-    Function Clone() As IShape
+    Function Contains(point As Point) As Boolean
 
-    Function PointClosestTo(point As Point2DF) As Point2DF
+    Function PointClosestTo(point As Point) As Point
 
 End Interface
