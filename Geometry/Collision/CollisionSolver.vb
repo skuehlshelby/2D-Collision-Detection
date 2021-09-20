@@ -1,8 +1,7 @@
 ﻿Namespace Collision
-    Public Class DiscreteCollisionSolver
-        Implements ICollisionSolver
+    Public Class CollisionSolver
 
-        Public Sub SolveCollision(collision As Pair(Of IShape)) Implements ICollisionSolver.SolveCollision
+        Public Sub Solve(collision As Pair(Of IShape))
             Dim first As IShape = collision.First
             Dim second As IShape = collision.Second
 
@@ -20,6 +19,13 @@
     
             first.Velocity = collisionTangent * dpTangent1 + collisionNormal * momentum1
             second.Velocity = collisionTangent * dpTangent2 + collisionNormal * momentum2
+        End Sub
+
+        Public Sub Solve(worldBounds As Bounds, shape As IShape)
+            If shape.Bounds().BottomLeft.X <= 0.0F Then shape.Velocity = New Vector(-shape.Velocity.X, shape.Velocity.Y)
+            If shape.Bounds().BottomLeft.Y <= 0.0F Then shape.Velocity = New Vector(shape.Velocity.X, -shape.Velocity.Y)
+            If shape.Bounds().TopRight.X >= worldBounds.Width() Then shape.Velocity = New Vector(-shape.Velocity.X, shape.Velocity.Y)
+            If shape.Bounds().TopRight.Y >= worldBounds.Height() Then shape.Velocity = New Vector(shape.Velocity.X, -shape.Velocity.Y)
         End Sub
 
     End Class

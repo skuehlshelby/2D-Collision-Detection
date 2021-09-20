@@ -24,12 +24,19 @@ Partial Class Simulation
     Private Sub InitializeComponent()
         Me.particleArea = New System.Windows.Forms.Panel()
         Me.optionsPanel = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.cbxCollisionDetectionMethod = New System.Windows.Forms.ComboBox()
+        Me.btnPause = New System.Windows.Forms.Button()
+        Me.cbxSplitMethod = New System.Windows.Forms.ComboBox()
+        Me.cbxShowBoundingVolumes = New System.Windows.Forms.CheckBox()
+        Me.cbxShowRenderTime = New System.Windows.Forms.CheckBox()
         Me.lblFPS = New System.Windows.Forms.Label()
         Me.btnFPS = New System.Windows.Forms.NumericUpDown()
         Me.lbl_particleCount = New System.Windows.Forms.Label()
         Me.particleCount = New System.Windows.Forms.NumericUpDown()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.optionsPanel.SuspendLayout
+        Me.TableLayoutPanel2.SuspendLayout
         CType(Me.btnFPS,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.particleCount,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TableLayoutPanel1.SuspendLayout
@@ -48,6 +55,7 @@ Partial Class Simulation
         '
         Me.optionsPanel.BackColor = System.Drawing.Color.Black
         Me.optionsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.optionsPanel.Controls.Add(Me.TableLayoutPanel2)
         Me.optionsPanel.Controls.Add(Me.lblFPS)
         Me.optionsPanel.Controls.Add(Me.btnFPS)
         Me.optionsPanel.Controls.Add(Me.lbl_particleCount)
@@ -58,6 +66,86 @@ Partial Class Simulation
         Me.optionsPanel.Name = "optionsPanel"
         Me.optionsPanel.Size = New System.Drawing.Size(234, 444)
         Me.optionsPanel.TabIndex = 1
+        '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.TableLayoutPanel2.ColumnCount = 1
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
+        Me.TableLayoutPanel2.Controls.Add(Me.cbxCollisionDetectionMethod, 0, 4)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnPause, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.cbxSplitMethod, 0, 3)
+        Me.TableLayoutPanel2.Controls.Add(Me.cbxShowBoundingVolumes, 0, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.cbxShowRenderTime, 0, 2)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 250)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 5
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(226, 184)
+        Me.TableLayoutPanel2.TabIndex = 5
+        '
+        'cbxCollisionDetectionMethod
+        '
+        Me.cbxCollisionDetectionMethod.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cbxCollisionDetectionMethod.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cbxCollisionDetectionMethod.FormattingEnabled = true
+        Me.cbxCollisionDetectionMethod.Location = New System.Drawing.Point(3, 147)
+        Me.cbxCollisionDetectionMethod.Name = "cbxCollisionDetectionMethod"
+        Me.cbxCollisionDetectionMethod.Size = New System.Drawing.Size(220, 23)
+        Me.cbxCollisionDetectionMethod.TabIndex = 4
+        Me.cbxCollisionDetectionMethod.Text = "Collision Detection Method"
+        '
+        'btnPause
+        '
+        Me.btnPause.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.btnPause.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnPause.ForeColor = System.Drawing.Color.Black
+        Me.btnPause.Location = New System.Drawing.Point(3, 3)
+        Me.btnPause.Name = "btnPause"
+        Me.btnPause.Size = New System.Drawing.Size(220, 30)
+        Me.btnPause.TabIndex = 2
+        Me.btnPause.Text = "Pause"
+        Me.btnPause.UseVisualStyleBackColor = false
+        '
+        'cbxSplitMethod
+        '
+        Me.cbxSplitMethod.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cbxSplitMethod.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cbxSplitMethod.FormattingEnabled = true
+        Me.cbxSplitMethod.Location = New System.Drawing.Point(3, 111)
+        Me.cbxSplitMethod.Name = "cbxSplitMethod"
+        Me.cbxSplitMethod.Size = New System.Drawing.Size(220, 23)
+        Me.cbxSplitMethod.TabIndex = 3
+        Me.cbxSplitMethod.Text = "Scene Split Method"
+        '
+        'cbxShowBoundingVolumes
+        '
+        Me.cbxShowBoundingVolumes.AutoSize = true
+        Me.cbxShowBoundingVolumes.Cursor = System.Windows.Forms.Cursors.Default
+        Me.cbxShowBoundingVolumes.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cbxShowBoundingVolumes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cbxShowBoundingVolumes.Location = New System.Drawing.Point(3, 39)
+        Me.cbxShowBoundingVolumes.Name = "cbxShowBoundingVolumes"
+        Me.cbxShowBoundingVolumes.Size = New System.Drawing.Size(220, 30)
+        Me.cbxShowBoundingVolumes.TabIndex = 0
+        Me.cbxShowBoundingVolumes.Text = "Show Bounding Volumes"
+        Me.cbxShowBoundingVolumes.UseVisualStyleBackColor = true
+        '
+        'cbxShowRenderTime
+        '
+        Me.cbxShowRenderTime.AutoSize = true
+        Me.cbxShowRenderTime.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cbxShowRenderTime.Location = New System.Drawing.Point(3, 75)
+        Me.cbxShowRenderTime.Name = "cbxShowRenderTime"
+        Me.cbxShowRenderTime.Size = New System.Drawing.Size(220, 30)
+        Me.cbxShowRenderTime.TabIndex = 1
+        Me.cbxShowRenderTime.Text = "Show Render Time (µs)"
+        Me.cbxShowRenderTime.UseVisualStyleBackColor = true
         '
         'lblFPS
         '
@@ -83,7 +171,7 @@ Partial Class Simulation
         'lbl_particleCount
         '
         Me.lbl_particleCount.AutoSize = true
-        Me.lbl_particleCount.Location = New System.Drawing.Point(12, 45)
+        Me.lbl_particleCount.Location = New System.Drawing.Point(12, 51)
         Me.lbl_particleCount.Name = "lbl_particleCount"
         Me.lbl_particleCount.Size = New System.Drawing.Size(85, 15)
         Me.lbl_particleCount.TabIndex = 1
@@ -104,8 +192,8 @@ Partial Class Simulation
         '
         Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Black
         Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 240!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
         Me.TableLayoutPanel1.Controls.Add(Me.optionsPanel, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.particleArea, 1, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -126,6 +214,8 @@ Partial Class Simulation
         Me.Text = "Particle Motion Simulation"
         Me.optionsPanel.ResumeLayout(false)
         Me.optionsPanel.PerformLayout
+        Me.TableLayoutPanel2.ResumeLayout(false)
+        Me.TableLayoutPanel2.PerformLayout
         CType(Me.btnFPS,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.particleCount,System.ComponentModel.ISupportInitialize).EndInit
         Me.TableLayoutPanel1.ResumeLayout(false)
@@ -140,4 +230,10 @@ End Sub
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents lblFPS As Label
     Friend WithEvents btnFPS As NumericUpDown
+    Friend WithEvents btnPause As Button
+    Friend WithEvents cbxShowRenderTime As CheckBox
+    Friend WithEvents cbxShowBoundingVolumes As CheckBox
+    Friend WithEvents cbxSplitMethod As ComboBox
+    Friend WithEvents cbxCollisionDetectionMethod As ComboBox
+    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
 End Class

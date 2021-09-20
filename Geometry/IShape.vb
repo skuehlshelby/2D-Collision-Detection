@@ -11,7 +11,7 @@ Public Interface IShape
 
     Property Mass As Single
 
-    Function Bounds() As Rectangle
+    Function Bounds() As Bounds
 
     Function Contains(point As Point) As Boolean
 

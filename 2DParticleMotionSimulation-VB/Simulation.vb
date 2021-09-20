@@ -1,8 +1,6 @@
-﻿Imports Geometry
-
-Public Class Simulation
+﻿Public Class Simulation
     Private Const Second As Integer = 1000
-    Private ReadOnly _world As World
+    Private ReadOnly _controller As SimulationController
     Private ReadOnly _timer As Timer = new Timer()
 
     Public Sub New()
@@ -10,11 +8,14 @@ Public Class Simulation
         
         particleArea.SetDoubleBuffered()
 
-        _world =  New World(particleArea.Height, particleArea.Width)
-
         btnFPS.Minimum = 1
         btnFPS.Maximum = 60
         btnFPS.Value = 30
+
+        _controller = New SimulationController(1 / btnFPS.Value, particleArea.Height, particleArea.Width)
+
+        cbxCollisionDetectionMethod.Items.AddRange(_controller.GetCollisionDetectionMethods().ToArray())
+        cbxSplitMethod.Items.AddRange(_controller.GetSceneSplitMethods().ToArray())
 
         _timer.Interval = Second \ CInt(btnFPS.Value)
         AddHandler _timer.Tick, AddressOf OnTick
@@ -22,34 +23,48 @@ Public Class Simulation
     End Sub
 
     Private Sub OnTick(sender As Object, e As EventArgs)
-        _world.Update(1 / btnFPS.Value)
-
         particleArea.Refresh()
     End Sub
 
     Private Sub OnParticleAreaPaint(sender As Object, e As PaintEventArgs) Handles particleArea.Paint
-        For Each shape As IShape In _world
-            e.Graphics.FillEllipse(new SolidBrush(shape.Color), shape.Bounds().ToDrawingApi(e.ClipRectangle.Height, Width))
+        For Each action As Action(Of Graphics) In _controller.GetScene()
+            action.Invoke(e.Graphics)
         Next
     End Sub
 
     Private Sub OnNumberOfParticlesChanged(sender As Object, e As EventArgs) Handles particleCount.ValueChanged
-        While particleCount.Value > _world.NumberOfParticles
-            _world.AddParticle(40, 40, Color.CornflowerBlue, Color.DarkCyan, Color.Goldenrod)
-        End While
-
-        While particleCount.Value < _world.Count
-            _world.RemoveParticle()
-        End While
+        _controller.SetNumberOfShapes(CInt(particleCount.Value))
     End Sub
 
     Private Sub Simulation_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-        If _world IsNot Nothing Then
-            _world.Bounds = New Rectangle((0.0F, particleArea.Height), (particleArea.Width, 0.0F))
+        If _controller IsNot Nothing Then
+            _controller.SetWorldSize(particleArea.Height, particleArea.Width)
         End If
     End Sub
 
     Private Sub btnFPS_ValueChanged(sender As Object, e As EventArgs) Handles btnFPS.ValueChanged
         _timer.Interval = Second \ CInt(btnFPS.Value)
+
+        If _controller IsNot Nothing Then
+            _controller.UpdateTimeStep(1 / btnFPS.Value)
+        End If
     End Sub
+
+    Private Sub cbxSplitMethod_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxSplitMethod.SelectedIndexChanged
+        _controller.SetSceneSplitMethod(cbxSplitMethod.SelectedItem.ToString())
+    End Sub
+
+    Private Sub btnPause_Click(sender As Object, e As EventArgs) Handles btnPause.Click
+        _controller.Paused = Not _controller.Paused
+        btnPause.Text = If(_controller.Paused, "Continue", "Pause")
+    End Sub
+
+    Private Sub cbxShowBoundingVolumes_CheckedChanged(sender As Object, e As EventArgs) Handles cbxShowBoundingVolumes.CheckedChanged
+        _controller.ShowBoundingVolumes = cbxShowBoundingVolumes.Checked
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles cbxShowRenderTime.CheckedChanged
+        _controller.CalculateRenderTime = cbxShowRenderTime.Checked
+    End Sub
+
 End Class

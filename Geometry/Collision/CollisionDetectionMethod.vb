@@ -8,6 +8,8 @@ Namespace Collision
 
         Public ReadOnly Property Name As String
 
+        Public MustOverride Function GetCollisions(bvh As BoundingVolumeHierarchy) As IEnumerable(Of Pair(Of IShape))
+
         Public MustOverride Function GetCollisions(shapes As IShape(), splitMethod As SplitMethod) As IEnumerable(Of Pair(Of IShape))
 
         Private Shared Function Overlap(first As IShape, second As IShape) As Boolean
@@ -41,16 +43,18 @@ Namespace Collision
             End Sub
 
             Public Overrides Function GetCollisions(shapes As IShape(), splitMethod As SplitMethod) As IEnumerable(Of Pair(Of IShape))
-                Dim bvh As BoundingVolumeHierarchy = New BoundingVolumeHierarchy(shapes, splitMethod)
+                Return GetCollisions(New BoundingVolumeHierarchy(shapes, splitMethod))
+            End Function
 
+            Public Overrides Function GetCollisions(bvh As BoundingVolumeHierarchy) As IEnumerable(Of Pair(Of IShape))
                 Dim results As ICollection(Of Pair(Of IShape)) = New List(Of Pair(Of IShape))()
 
-                For Each leaf As IShape() In bvh.Leaves
-                    If leaf.Length > 1 Then
-                        For i As Integer = 0 To leaf.Length - 2
-                            For j As Integer = i + 1 To leaf.Length - 1
-                                If Overlap(leaf(i), leaf(j)) AndAlso AreMovingTowardsEachOther(leaf(i), leaf(j)) Then
-                                    results.Add(New Pair(Of IShape)(leaf(i), leaf(j)))
+                For Each leaf As BoundingVolumeHierarchy.IBvhNode In bvh.Leaves
+                    If leaf.Shapes.Length > 1 Then
+                        For i As Integer = 0 To leaf.Shapes.Length - 2
+                            For j As Integer = i + 1 To leaf.Shapes.Length - 1
+                                If Overlap(leaf.Shapes(i), leaf.Shapes(j)) AndAlso AreMovingTowardsEachOther(leaf.Shapes(i), leaf.Shapes(j)) Then
+                                    results.Add(New Pair(Of IShape)(leaf.Shapes(i), leaf.Shapes(j)))
                                 End If
                             Next
                         Next
@@ -67,6 +71,10 @@ Namespace Collision
             Public Sub New()
                 MyBase.New("Continuous")
             End Sub
+
+            Public Overrides Function GetCollisions(bvh As BoundingVolumeHierarchy) As IEnumerable(Of Pair(Of IShape))
+                Throw New NotImplementedException
+            End Function
 
             Public Overrides Function GetCollisions(shapes As IShape(), splitMethod As SplitMethod) As IEnumerable(Of Pair(Of IShape))
                 Throw New NotImplementedException

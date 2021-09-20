@@ -75,13 +75,10 @@
     <Compile Include="BVH\SplitMethod.vb" />
     <Compile Include="BVH\SplitResult.vb" />
     <Compile Include="Collision\CollisionDetectionMethod.vb" />
-    <Compile Include="Collision\DiscreteCollisionSolver.vb" />
-    <Compile Include="Collision\ICollisionSolver.vb" />
-    <Compile Include="Collision\IResolveCollision.vb" />
-    <Compile Include="Collision\WorldBoundCollisionResolver.vb" />
+    <Compile Include="Collision\CollisionSolver.vb" />
     <Compile Include="Fraction.vb" />
     <Compile Include="Pair.vb" />
-    <Compile Include="Rectangle.vb" />
+    <Compile Include="Bounds.vb" />
     <Compile Include="Circle.vb" />
     <Compile Include="IShape.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

@@ -67,7 +67,7 @@ Public Class ShapeTests
     <TestMethod()> 
     Public Sub RectangleConversionIsCorrect()
         Dim circle1 As IShape = New Circle(38.0F, Color.CornflowerBlue, (268.33F, 132.17F), New Vector(-10.0F, 13.0F))
-        Dim circle1Bounds As Geometry.Rectangle = circle1.Bounds()
+        Dim circle1Bounds As Geometry.Bounds = circle1.Bounds()
         Dim drawingRect As RectangleF = New RectangleF(circle1Bounds.TopLeft.X, circle1Bounds.TopLeft.Y, circle1Bounds.Width(), circle1Bounds.Height())
 
         Assert.AreEqual(circle1Bounds.Area(), drawingRect.Width * drawingRect.Height, 0.01)

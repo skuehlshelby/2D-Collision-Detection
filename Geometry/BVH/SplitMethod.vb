@@ -16,12 +16,12 @@
             Return Values().Single(Function(value) value.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
         End Function
 
-        Private Shared Function GetBounds(shapes As IEnumerable(Of IShape)) As Rectangle
-            Return Rectangle.Union(shapes.Select(Function(shape) shape.Bounds()))
+        Private Shared Function GetBounds(shapes As IEnumerable(Of IShape)) As Bounds
+            Return Bounds.Union(shapes.Select(Function(shape) shape.Bounds()))
         End Function
 
         Private Shared Function DefaultFailureRule(original As IShape(), firstHalf As IShape(), secondHalf As IShape()) As Boolean
-            Return (firstHalf.Length = original.Length) OrElse (secondHalf.Length = original.Length)
+            Return (firstHalf.Length >= original.Length) OrElse (secondHalf.Length >= original.Length)
         End Function
 
         Public Shared ReadOnly Property Midpoint As SplitMethod = New MidpointSplit()
@@ -38,7 +38,7 @@
             End Sub
 
             Public Overrides Function Split(shapes() As IShape) As SplitResult
-                Dim bounds As Rectangle = GetBounds(shapes)
+                Dim bounds As Bounds = GetBounds(shapes)
                 Dim splitAxis As Axis = bounds.LongestAxis().Opposite()
                 Dim partition As PartitionedRectangle = new PartitionedRectangle(bounds, 1/2, splitAxis)
 
@@ -57,15 +57,15 @@
             End Sub
 
             Public Overrides Function Split(shapes() As IShape) As SplitResult
-                Dim bounds As Rectangle = GetBounds(shapes)
+                Dim bounds As Bounds = GetBounds(shapes)
                 Dim splitAxis As Axis = bounds.LongestAxis()
                 Dim sortedByAxis As IShape() = shapes.OrderBy(Function(shape) splitAxis.GetSelector(shape.Center)).ToArray()
                 
                 Dim firstHalf As IShape() = sortedByAxis.Take(sortedByAxis.Length \ 2).ToArray()
                 Dim secondHalf As IShape() = sortedByAxis.Skip(firstHalf.Length).ToArray()
                 
-                Dim firstHalfBounds As Rectangle = GetBounds(firstHalf)
-                Dim secondHalfBounds As Rectangle = GetBounds(secondHalf)
+                Dim firstHalfBounds As Bounds = GetBounds(firstHalf)
+                Dim secondHalfBounds As Bounds = GetBounds(secondHalf)
 
                 firstHalf = firstHalf.Concat(secondHalf.Where(Function(shape) shape.Bounds().Intersects(firstHalfBounds))).ToArray()
                 secondHalf = secondHalf.Concat(firstHalf.Where(Function(shape) shape.Bounds().Intersects(secondHalfBounds))).ToArray()

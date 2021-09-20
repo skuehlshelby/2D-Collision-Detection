@@ -31,8 +31,8 @@ Public NotInheritable Class Circle
 
     Public Property Mass As Single Implements IShape.Mass
 
-    Public Function Bounds() As Rectangle Implements IShape.Bounds
-        Return New Rectangle((Center.X - Radius, Center.Y + Radius), (Center.X + Radius, Center.Y - Radius))
+    Public Function Bounds() As Bounds Implements IShape.Bounds
+        Return New Bounds((Center.X - Radius, Center.Y - Radius), (Center.X + Radius, Center.Y + Radius))
     End Function
 
     Public Function Contains(point As Point) As Boolean Implements IShape.Contains

@@ -12,11 +12,25 @@ Public Module Extensions
     End Sub
 
     <Extension()>
-    Public Function ToDrawingApi(rect As Rectangle, worldHeight As Integer, worldWidth As Integer) As RectangleF
-        Return New RectangleF(rect.TopLeft.X, worldHeight - rect.TopLeft.Y, rect.Width(), rect.Height())
+    Public Function ToDrawingApi(rect As Bounds, worldHeight As Integer, worldWidth As Integer) As RectangleF
+        Return New RectangleF(rect.TopLeft().X, worldHeight - rect.TopLeft().Y, rect.Width(), rect.Height())
     End Function
 
-    
+    <Extension()>
+    Public Function ToRectangle(rect As Bounds, worldHeight As Integer) As Rectangle
+        Return New Rectangle(CInt(rect.BottomLeft.X), worldHeight - CInt(rect.TopRight.Y), CInt(rect.Width()), CInt(rect.Height()))
+    End Function
+
+    <Extension()>
+    Public Function ToRectangleF(rect As Bounds, worldHeight As Integer) As RectangleF
+        Return New RectangleF(rect.BottomLeft.X, worldHeight - rect.TopRight.Y, rect.Width(), rect.Height())
+    End Function
+
+    <Extension()>
+    Public Function ToRectangle(rectF As RectangleF) As Rectangle
+        Return New Rectangle(CInt(rectF.X), CInt(rectF.Y), CInt(rectF.Width), CInt(rectF.Height))
+    End Function
+
     Public Function GetRandomShape(maxRadius As Integer, maxVelocity As Integer, containerWidth As Integer, containerHeight As Integer, ParamArray colors As Color()) As IShape
         Dim random As Random = New Random()
 
