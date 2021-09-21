@@ -88,13 +88,37 @@ Public Structure Bounds
             Return New Bounds()
         Else
             Do
-                Dim current As Bounds = boxEnumerator.Current
-
-                If maxX < current.TopRight.X Then maxX = current.TopRight.X
-                If maxY < current.TopRight.Y Then maxY = current.TopRight.Y
-                If current.BottomLeft.X < minX Then minX = current.BottomLeft.X
-                If current.BottomLeft.Y < minY Then minY = current.BottomLeft.Y
+                With boxEnumerator.Current
+                    If maxX < .TopRight.X Then maxX = .TopRight.X
+                    If maxY < .TopRight.Y Then maxY = .TopRight.Y
+                    If .BottomLeft.X < minX Then minX = .BottomLeft.X
+                    If .BottomLeft.Y < minY Then minY = .BottomLeft.Y
+                End With
             Loop While boxEnumerator.MoveNext()
+        End If
+
+        Return New Bounds((minX, minY), (maxX, maxY))
+    End Function
+
+    Public Shared Function Union(points As IEnumerable(Of Point)) As Bounds
+        Dim maxX As Single = Single.NegativeInfinity
+        Dim maxY As Single = Single.NegativeInfinity
+        Dim minX As Single = Single.PositiveInfinity
+        Dim minY As Single = Single.PositiveInfinity
+
+        Dim pointEnumerator As IEnumerator(Of Point) = points.GetEnumerator()
+
+        If Not pointEnumerator.MoveNext() Then
+            Return New Bounds()
+        Else
+            Do
+                With pointEnumerator.Current
+                    If maxX < .X Then maxX = .X
+                    If maxY < .Y Then maxY = .Y
+                    If .X < minX Then minX = .X
+                    If .Y < minY Then minY = .Y
+                End With
+            Loop While pointEnumerator.MoveNext()
         End If
 
         Return New Bounds((minX, minY), (maxX, maxY))
@@ -114,12 +138,6 @@ Public Structure Bounds
 
     Public Overrides Function GetHashCode() As Integer
         Return (BottomLeft, TopRight).GetHashCode()
-    End Function
-
-    Public Shared Property WorldCoordinateTransform As Func(Of Bounds, Bounds) = AddressOf DefaultCoordinateTransform
-
-    Private Shared Function DefaultCoordinateTransform(bounds As Bounds) As Bounds
-        Return bounds
     End Function
 
 End Structure

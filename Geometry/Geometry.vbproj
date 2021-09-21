@@ -71,7 +71,6 @@
   <ItemGroup>
     <Compile Include="Axis.vb" />
     <Compile Include="BVH\BoundingVolumeHierarchy.vb" />
-    <Compile Include="BVH\PartitionedRectangle.vb" />
     <Compile Include="BVH\SplitMethod.vb" />
     <Compile Include="BVH\SplitResult.vb" />
     <Compile Include="Collision\CollisionDetectionMethod.vb" />

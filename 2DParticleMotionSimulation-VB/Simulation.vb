@@ -17,6 +17,12 @@
         cbxCollisionDetectionMethod.Items.AddRange(_controller.GetCollisionDetectionMethods().ToArray())
         cbxSplitMethod.Items.AddRange(_controller.GetSceneSplitMethods().ToArray())
 
+        For Each c As Color In _controller.GetColors()
+            colorPanel.Controls.Add(New Label With {.BackColor = c, .Height = 10, .Width = 10 })
+        Next
+        
+        colorPanel.PerformLayout()
+
         _timer.Interval = Second \ CInt(btnFPS.Value)
         AddHandler _timer.Tick, AddressOf OnTick
         _timer.Start()

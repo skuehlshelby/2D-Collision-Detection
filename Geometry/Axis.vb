@@ -12,9 +12,11 @@
 
     Public MustOverride Function Opposite() As Axis
 
-    Public MustOverride Function GetSelector(point As Point) As Single
+    Public MustOverride Function SelectAxis(point As Point) As Single
 
-    Public MustOverride Function GetSelector(vector As Vector) As Single
+    Public MustOverride Function SelectAxis(vector As Vector) As Single
+
+    Public MustOverride Function SelectAxis(bounds As Bounds) As Single
 
     Public Overrides Function ToString() As String
         Return Name
@@ -47,12 +49,16 @@
             Return Vertical
         End Function
 
-        Public Overrides Function GetSelector(point As Point) As Single
+        Public Overrides Function SelectAxis(point As Point) As Single
             Return point.X
         End Function
 
-        Public Overrides Function GetSelector(vector As Vector) As Single
+        Public Overrides Function SelectAxis(vector As Vector) As Single
             Return vector.X
+        End Function
+
+        Public Overrides Function SelectAxis(bounds As Bounds) As Single
+            Return bounds.Width()
         End Function
     End Class
 
@@ -67,12 +73,16 @@
             Return Horizontal
         End Function
 
-        Public Overrides Function GetSelector(point As Point) As Single
+        Public Overrides Function SelectAxis(point As Point) As Single
             Return point.Y
         End Function
 
-        Public Overrides Function GetSelector(vector As Vector) As Single
+        Public Overrides Function SelectAxis(vector As Vector) As Single
             Return vector.Y
+        End Function
+
+        Public Overrides Function SelectAxis(bounds As Bounds) As Single
+            Return bounds.Height()
         End Function
     End Class
 

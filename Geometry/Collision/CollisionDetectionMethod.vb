@@ -47,21 +47,11 @@ Namespace Collision
             End Function
 
             Public Overrides Function GetCollisions(bvh As BoundingVolumeHierarchy) As IEnumerable(Of Pair(Of IShape))
-                Dim results As ICollection(Of Pair(Of IShape)) = New List(Of Pair(Of IShape))()
-
-                For Each leaf As BoundingVolumeHierarchy.IBvhNode In bvh.Leaves
-                    If leaf.Shapes.Length > 1 Then
-                        For i As Integer = 0 To leaf.Shapes.Length - 2
-                            For j As Integer = i + 1 To leaf.Shapes.Length - 1
-                                If Overlap(leaf.Shapes(i), leaf.Shapes(j)) AndAlso AreMovingTowardsEachOther(leaf.Shapes(i), leaf.Shapes(j)) Then
-                                    results.Add(New Pair(Of IShape)(leaf.Shapes(i), leaf.Shapes(j)))
-                                End If
-                            Next
-                        Next
-                    End If
-                Next
-
-                Return results
+                Return _
+                    bvh.GetCollisionCandidates().Where(
+                        Function(candidate) _
+                          Overlap(candidate.First, candidate.Second) AndAlso
+                          AreMovingTowardsEachOther(candidate.First, candidate.Second))
             End Function
         End Class
 

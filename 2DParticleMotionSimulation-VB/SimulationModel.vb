@@ -28,7 +28,7 @@ Friend NotInheritable Class SimulationModel
         End If
 
         If options.ShowBoundingVolumes Then
-            RenderBvhBounds(scene, info, New BoundingVolumeHierarchy(info.Shapes.ToArray(), options.SceneSplitMethod).Leaves.Select(Function(leaf) leaf.Bounds))
+            RenderBvhBounds(scene, info, New BoundingVolumeHierarchy(info.Shapes.ToArray(), options.SceneSplitMethod).GetBoundingVolumes())
         End If
 
         RenderShapes(scene, info)
@@ -54,11 +54,8 @@ Friend NotInheritable Class SimulationModel
                 .DashStyle = DashStyle.Dash 
                 }
 
-        Dim transformedVolumes As IEnumerable(Of Bounds) = volumes.Select(Function(volume) Bounds.WorldCoordinateTransform.Invoke(volume))
-        Dim volumesAsRectangles As IEnumerable(Of Rectangle) = transformedVolumes.Select(Function(transformedVolume) transformedVolume.ToRectangle(CInt(info.WorldBounds.Height())))
-
-        For Each volume As Rectangle In volumesAsRectangles
-            scene.Enqueue(Sub(g) g.DrawRectangle(redDashes, volume))
+        For Each volume As Bounds In volumes
+            scene.Enqueue(Sub(g) g.DrawRectangle(redDashes, volume.ToRectangle(CInt(info.WorldBounds.Height()))))
         Next
     End Sub
 
@@ -154,5 +151,19 @@ Friend NotInheritable Class SimulationModel
             info.Shapes.Remove(info.Shapes.Last())
         End If
     End Sub
+
+    Public Sub AddColor(color As Color, info As SceneInfo)
+        If Not info.ShapeColors.Contains(color) Then
+            info.ShapeColors.Add(color)
+        End If
+    End Sub
+
+    Public Function RemoveColor(color As Color, info As SceneInfo) As Color
+        If info.ShapeColors.Contains(color) Then
+            info.ShapeColors.Remove(color)
+        End If
+
+        Return color
+    End Function
 
 End Class

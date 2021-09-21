@@ -10,9 +10,9 @@ Friend NotInheritable Class SimulationController
         model = New SimulationModel()
     End Sub
 
-    Private options As RenderOptions
-    Private info As SceneInfo
-    Private model As SimulationModel
+    Private ReadOnly options As RenderOptions
+    Private ReadOnly info As SceneInfo
+    Private ReadOnly model As SimulationModel
 
     Public Property Paused As Boolean
         Get
@@ -73,5 +73,17 @@ Friend NotInheritable Class SimulationController
     Public Sub UpdateTimeStep(newTimeStep As Single)
         options.TimeStep = newTimeStep
     End Sub
+
+    Public Sub AddColor(color As Color)
+        model.AddColor(color, info)
+    End Sub
+
+    Public Sub RemoveColor(color As Color)
+        model.RemoveColor(color, info)
+    End Sub
+
+    Public Function GetColors() As Color()
+        Return info.ShapeColors.ToArray()
+    End Function
 
 End Class
