@@ -1,7 +1,5 @@
 ﻿Imports System.Numerics
-Imports System.Text
-Imports Geometry
-Imports Microsoft.VisualStudio.TestTools.UnitTesting
+Imports CollisionDetection.Model
 
 <TestClass()>
 Public Class VectorTests

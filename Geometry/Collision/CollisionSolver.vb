@@ -22,10 +22,10 @@
         End Sub
 
         Public Sub Solve(worldBounds As Bounds, shape As IShape)
-            If shape.Bounds().BottomLeft.X <= 0.0F Then shape.Velocity = New Vector(-shape.Velocity.X, shape.Velocity.Y)
-            If shape.Bounds().BottomLeft.Y <= 0.0F Then shape.Velocity = New Vector(shape.Velocity.X, -shape.Velocity.Y)
-            If shape.Bounds().TopRight.X >= worldBounds.Width() Then shape.Velocity = New Vector(-shape.Velocity.X, shape.Velocity.Y)
-            If shape.Bounds().TopRight.Y >= worldBounds.Height() Then shape.Velocity = New Vector(shape.Velocity.X, -shape.Velocity.Y)
+            If shape.Bounds().BottomLeft.X <= 0.0F AndAlso shape.Velocity.X < 0.0F Then shape.Velocity = New Vector(-shape.Velocity.X, shape.Velocity.Y)
+            If shape.Bounds().BottomLeft.Y <= 0.0F AndAlso shape.Velocity.Y < 0.0F Then shape.Velocity = New Vector(shape.Velocity.X, -shape.Velocity.Y)
+            If shape.Bounds().TopRight.X >= worldBounds.Width() AndAlso shape.Velocity.X > 0.0F Then shape.Velocity = New Vector(-shape.Velocity.X, shape.Velocity.Y)
+            If shape.Bounds().TopRight.Y >= worldBounds.Height() AndAlso shape.Velocity.Y > 0.0F Then shape.Velocity = New Vector(shape.Velocity.X, -shape.Velocity.Y)
         End Sub
 
     End Class

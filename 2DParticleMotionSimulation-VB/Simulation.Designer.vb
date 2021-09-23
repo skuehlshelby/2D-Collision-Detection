@@ -209,6 +209,7 @@ Partial Class Simulation
         'colorPanel
         '
         Me.TableLayoutPanel2.SetColumnSpan(Me.colorPanel, 2)
+        Me.colorPanel.Cursor = System.Windows.Forms.Cursors.Hand
         Me.colorPanel.Location = New System.Drawing.Point(3, 267)
         Me.colorPanel.Name = "colorPanel"
         Me.colorPanel.Size = New System.Drawing.Size(214, 27)

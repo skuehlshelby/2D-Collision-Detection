@@ -120,9 +120,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Geometry\Geometry.vbproj">
+    <ProjectReference Include="..\Geometry\CollisionDetection.Model.vbproj">
       <Project>{190df025-ea21-4cdc-822a-6fe86732b64f}</Project>
-      <Name>Geometry</Name>
+      <Name>CollisionDetection.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

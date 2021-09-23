@@ -8,7 +8,7 @@
         End Sub
 
         Private Shared Function Build(shapes As IShape(), splitMethod As SplitMethod) As BvhBuildNode
-            If shapes.Length > 1 Then
+            If shapes.Length > 2 Then
                 Dim result As SplitResult = splitMethod.Split(shapes)
 
                 If result.Failed Then

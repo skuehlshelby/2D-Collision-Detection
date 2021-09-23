@@ -45,15 +45,6 @@ Public Structure Point
     End Function
 
     <Pure>
-    Public Function Translate(direction As Axis, magnitude As Single) As Point
-        If direction = Axis.Horizontal Then
-            Return New Point(X + magnitude, Y)
-        Else
-            Return New Point(X, Y + magnitude)
-        End If
-    End Function
-
-    <Pure>
     Public Function Distance(other As Point) As Double
         Return Math.Sqrt(DistanceSquared(other))
     End Function
@@ -64,6 +55,8 @@ Public Structure Point
         Dim yDistance As Single = Math.Abs(Y - other.Y)
         Return (xDistance * xDistance) + (yDistance * yDistance)
     End Function
+
+#Region "Operators"
 
     Public Shared Operator +(left As Point, right As Vector) As Point
         Return New Point(left.X + right.X, left.Y + right.Y)
@@ -101,6 +94,18 @@ Public Structure Point
         Return New Point(tuple.Item1, tuple.Item2)
     End Operator
 
+    Public Shared Narrowing Operator CType(point As Point) As Drawing.Point
+        Return New Drawing.Point(CInt(point.X), CInt(point.Y))
+    End Operator
+
+    Public Shared Widening Operator CType(point As Point) As Drawing.PointF
+        Return New Drawing.PointF(point.X, point.Y)
+    End Operator
+
+#End Region
+
+#Region "Overrides"
+
     Public Overloads Overrides Function Equals(obj As Object) As Boolean
         Return obj IsNot Nothing AndAlso TypeOf obj Is Point AndAlso Equals(DirectCast(obj, Point))
     End Function
@@ -116,5 +121,7 @@ Public Structure Point
     Public Overrides Function ToString() As String
         Return $"({Math.Round(X, 2)}, {Math.Round(Y, 2)})"
     End Function
+
+#End Region
 
 End Structure

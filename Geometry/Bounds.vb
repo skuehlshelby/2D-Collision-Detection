@@ -1,4 +1,5 @@
 ﻿Imports System.Diagnostics.Contracts
+Imports System.Drawing
 
 Public Structure Bounds
     Implements IEquatable(Of Bounds)
@@ -139,5 +140,17 @@ Public Structure Bounds
     Public Overrides Function GetHashCode() As Integer
         Return (BottomLeft, TopRight).GetHashCode()
     End Function
+
+    Public Overrides Function ToString() As String
+        Return $"{BottomLeft} : {TopRight} "
+    End Function
+
+    Public Shared Narrowing Operator CType(bounds As Bounds) As Rectangle
+        Return New Rectangle(CInt(bounds.BottomLeft.X), CInt(bounds.BottomLeft.Y), CInt(bounds.Width()), CInt(bounds.Height()))
+    End Operator
+
+    Public Shared Widening Operator CType(bounds As Bounds) As RectangleF
+        Return New RectangleF(bounds.BottomLeft.X, bounds.BottomLeft.Y, bounds.Width(), bounds.Height())
+    End Operator
 
 End Structure

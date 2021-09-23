@@ -1,4 +1,4 @@
-﻿Imports Geometry
+﻿Imports CollisionDetection.Model
 
 <TestClass()> 
 Public Class Point2DFTests

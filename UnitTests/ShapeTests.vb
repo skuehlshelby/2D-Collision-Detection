@@ -1,14 +1,13 @@
 ﻿Imports System.Drawing
-Imports System.Text
-Imports Geometry
-Imports Microsoft.VisualStudio.TestTools.UnitTesting
+Imports CollisionDetection.Model
+Imports Point2D = CollisionDetection.Model.Point 
 
 <TestClass()> 
 Public Class ShapeTests
 
     <TestMethod()> 
     Public Sub CircleContainsPoint()
-        Dim point As Geometry.Point = (0.0F, 0.0F)
+        Dim point As Point2D = (0.0F, 0.0F)
         Dim circle As IShape = New Circle(6.0F, Color.CornflowerBlue, (5.0F, 2.0F), Vector.Zero)
 
         Assert.IsTrue(circle.Contains(point))
@@ -16,7 +15,7 @@ Public Class ShapeTests
 
     <TestMethod()> 
     Public Sub CircleDoesNotContainPoint()
-        Dim point As Geometry.Point = (1.0F, 1.0F)
+        Dim point As Point2D = (1.0F, 1.0F)
         Dim circle As IShape = New Circle(2.0F, Color.CornflowerBlue, (3.0F, 2.0F), Vector.Zero)
 
         Assert.IsFalse(circle.Contains(point))
@@ -39,8 +38,8 @@ Public Class ShapeTests
         Assert.AreEqual(2.0, vectorWithMagnitudeEqualToCircle1RadiusPointingTowardCenterOfCircle2.Magnitude(), 0.01)
         Assert.AreEqual(2.0, vectorWithMagnitudeEqualToCircle2RadiusPointingTowardCenterOfCircle1.Magnitude(), 0.01)
 
-        Dim pointFromCircle1ClosestToCenterOfCircle2 As Geometry.Point = circle1.Center + vectorWithMagnitudeEqualToCircle1RadiusPointingTowardCenterOfCircle2
-        Dim pointFromCircle2ClosestToCenterOfCircle1 As Geometry.Point = circle2.Center + vectorWithMagnitudeEqualToCircle2RadiusPointingTowardCenterOfCircle1
+        Dim pointFromCircle1ClosestToCenterOfCircle2 As Point2D = circle1.Center + vectorWithMagnitudeEqualToCircle1RadiusPointingTowardCenterOfCircle2
+        Dim pointFromCircle2ClosestToCenterOfCircle1 As Point2D = circle2.Center + vectorWithMagnitudeEqualToCircle2RadiusPointingTowardCenterOfCircle1
 
         Assert.IsTrue(circle1.Contains(pointFromCircle2ClosestToCenterOfCircle1))
         Assert.IsTrue(circle2.Contains(pointFromCircle1ClosestToCenterOfCircle2))
@@ -67,7 +66,7 @@ Public Class ShapeTests
     <TestMethod()> 
     Public Sub RectangleConversionIsCorrect()
         Dim circle1 As IShape = New Circle(38.0F, Color.CornflowerBlue, (268.33F, 132.17F), New Vector(-10.0F, 13.0F))
-        Dim circle1Bounds As Geometry.Bounds = circle1.Bounds()
+        Dim circle1Bounds As Bounds = circle1.Bounds()
         Dim drawingRect As RectangleF = New RectangleF(circle1Bounds.TopLeft.X, circle1Bounds.TopLeft.Y, circle1Bounds.Width(), circle1Bounds.Height())
 
         Assert.AreEqual(circle1Bounds.Area(), drawingRect.Width * drawingRect.Height, 0.01)

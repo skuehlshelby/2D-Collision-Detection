@@ -1,14 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
-    <RootNamespace>ParticleMotionSimulation_VB</RootNamespace>
-    <StartupObject>ParticleMotionSimulation_VB.Simulation</StartupObject>
+    <RootNamespace>CollisionDetection.View</RootNamespace>
+    <StartupObject>CollisionDetection.View.Program</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <MyType>WindowsForms</MyType>
     <OptionStrict>On</OptionStrict>
     <OptionInfer>Off</OptionInfer>
+    <AssemblyName>CollisionDetection.View</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -28,7 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Geometry\Geometry.vbproj" />
+    <ProjectReference Include="..\Geometry\CollisionDetection.Model.vbproj" />
+    <ProjectReference Include="..\PresentationLayer\CollisionDetection.Presentation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

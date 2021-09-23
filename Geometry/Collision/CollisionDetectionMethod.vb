@@ -1,4 +1,4 @@
-﻿Imports Geometry.BVH
+﻿Imports CollisionDetection.Model.BVH
 
 Namespace Collision
     Public MustInherit Class CollisionDetectionMethod
@@ -28,7 +28,7 @@ Namespace Collision
         Public Shared ReadOnly Property Continuous As CollisionDetectionMethod = New ContinuousDetection()
 
         Public Shared Function Values() As IEnumerable(Of CollisionDetectionMethod)
-            Return New CollisionDetectionMethod() { Discrete, Continuous }
+            Return New CollisionDetectionMethod() {Discrete, Continuous}
         End Function
 
         Public Shared Function Parse(name As String) As CollisionDetectionMethod
